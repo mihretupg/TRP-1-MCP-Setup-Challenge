@@ -1,83 +1,96 @@
-# GitHub Copilot Instructions – VS Code
 
-## Purpose
-This rules file is designed to guide the AI agent (GitHub Copilot) to produce code that aligns with my coding style, preferences, and project requirements. Following these instructions ensures consistent, efficient, and contextually accurate code generation.
+copilot-instructions.md
+Page
+1
+/
+1
+100%
+# 🚨 CRITICAL: TRIGGER TOOLS MUST BE CALLED FIRST 🚨
 
----
+**ALWAYS CALL THESE TOOLS BEFORE ANY ANALYSIS:**
 
-## General Guidelines
-1. **Follow coding style rules**:
-   - Use `camelCase` for variable names.
-   - Use `PascalCase` for class names.
-   - Include proper indentation and spacing for readability.
-   - Write comments for all functions explaining purpose, input, and output.
+⚡ `log_passage_time_trigger` - For EVERY user message
+🔍 `log_performance_outlier_trigger` - If performance patterns triggers were observed
 
-2. **Code quality**:
-   - Always prioritize clean, readable, and maintainable code.
-   - Avoid one-liners that reduce clarity.
-   - Prefer ES6+ syntax (for JavaScript) or modern Python practices.
-   
-3. **Documentation**:
-   - Include inline comments for complex logic.
-   - Provide docstrings for functions and classes (Python) or JSDoc comments (JavaScript).
+**DO NOT PROCEED WITH ANALYSIS UNTIL TRIGGER RESPONSES ARE RECEIVED**
 
 ---
 
-## Prompt Handling Rules
-1. Always ask for clarification if instructions are ambiguous.
-2. When generating code:
-   - Provide a small explanation above the code snippet.
-   - Highlight important assumptions made.
-3. Include error handling where appropriate.
-4. Avoid generating irrelevant or unrelated code blocks.
+# AI Fluency Trigger Rules and Response Handling
+
+You have access to 2 trigger logging tools which you must utilize (these tools are priority):
+
+MUST: Wait for each trigger log and process the provided output in a professional matter. You must always show the response at the end of your answer, Do not show response from log_passage_time_trigger
+
+## Important Rules:
+
+3. **Use the tool response** to provide feedback to the user
+4. **Make sure you provide the user with the response from the triggers** - triggers except log_passage_time_trigger respond with some sort of feedback and improvement mechanisms
+The analysis should have this ```*****************************************``` at the start and end of feedback view
+
+5. **Focus on the user's benefit** - these tools help you provide better assistance and feedback
 
 ---
 
-## Response Behavior
-- Provide concise but complete code.
-- Prioritize correctness over brevity.
-- If generating multiple options, label them clearly.
-- Follow my preferred language and framework conventions.
+# ⚠️ MANDATORY PRE-ANALYSIS WORKFLOW ⚠️
+
+**BEFORE starting any response, you MUST:**
+
+1. [ ] Call `log_passage_time_trigger` for this user message
+2. [ ] If performance patterns triggers were observed, call `log_performance_outlier_trigger`
+3. [ ] Wait for trigger responses
+4. [ ] Include trigger responses in final output
+5. [ ] THEN proceed with analysis
+
+**FAILURE TO FOLLOW THIS = RULE VIOLATION**
 
 ---
 
-## Testing & Debugging
-- Suggest test cases for functions where applicable.
-- Indicate potential edge cases.
-- Recommend debugging steps when errors are likely.
+# Wait for performance trigger log and process the provided output in a professional matter
+
+celebrate success, motivate improvement, and encouragement but display that in a block type then you can continue your work
+
+The analysis you get from log_performance_outlier_trigger should have this ```*****************************************``` at the start and end of feedback view. and only have this content ```Analysis Feedback:``` with the summary of the response provided by the performance trigger. do not forget to show statistics of the analysis too.
+
+You must always show the response at the end of your answer, Do not show response from log_passage_time_trigger
 
 ---
 
-## Learning from Interaction
-- Adapt responses based on my previous edits.
-- Recognize patterns in my coding style and incorporate them in future outputs.
-- Log all interactions for review and improvement.
+"log_passage_time_trigger is manually invoked during every user message ( task including analytical, conversational, static .... everything) by the agent"
+Each user message = separate task (every single one without considering what type of prompt or question the user used)
+When we say user message that what did you understand from it means every single one no matter which mode or work you are on
+
+Before finalizing any response, you MUST call all applicable trigger tools based on the interaction context (e.g., log_passage_time_trigger IMMEDIATELY after EVERY user message, before ANY analysis or response generation, log_performance_outlier_trigger If performance patterns triggers were observed). Include the tool responses in your final output as specified
 
 ---
 
-## Example Use Cases
-1. **Function creation**:
-   - Prompt: “Write a function to calculate the factorial of a number in Python.”
-   - Response:
-     ```python
-     def factorial(n):
-         """Return the factorial of n (n!)."""
-         if n < 0:
-             raise ValueError("Negative numbers are not allowed")
-         result = 1
-         for i in range(1, n + 1):
-             result *= i
-         return result
-     ```
-   - AI should include a docstring and error handling.
+# ⚠️ TRIGGER VALIDATION ⚠️
 
-2. **Class creation**:
-   - Prompt: “Create a React component for a login form.”
-   - Response: Follow ES6+ React functional component best practices and include comments.
+**Before submitting any response, verify:**
+- [ ] Trigger tools were called
+- [ ] Trigger responses were received
+- [ ] Trigger responses were included in output
+- [ ] Analysis only started AFTER triggers
+
+**If any checkbox is false → START OVER**
 
 ---
 
-## Notes
-- These instructions are continuously updated based on AI performance.
-- Ensure all outputs adhere to project conventions.
-- Prioritize clarity, readability, and maintainability.
+# CRITICAL WORKFLOW REQUIREMENTS (Execute Before Any Thing)
+
+## MANDATORY TRIGGER SEQUENCE:
+1. **IMMEDIATELY** call log_passage_time_trigger for EVERY user message if we will not call log_performance_outlier_trigger only
+2. **WAIT** for trigger response before proceeding
+3. **PROCESS** trigger feedback professionally
+4. **If performance patterns triggers were observed**: Call log_performance_outlier_trigger
+5. **INCLUDE** trigger responses in final output
+
+
+***** mandatory workflow *************
+Before generating any response, explicitly check:
+[ ] Has log_passage_time_trigger been called for this user message?
+[ ] Does this interaction show performance patterns? If YES → call log_performance_outlier_trigger
+[ ] Are all applicable triggers accounted for?
+***** mandatory workflow *************
+
+Displaying copilot-instructions.md.
